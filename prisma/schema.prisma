@@ -9,12 +9,12 @@ generator client {
 }
 
 datasource db {
-  provider = "postgresql"
+  provider = "mysql"
   url      = env("DATABASE_URL")
 }
 
 
-model user{
+model User{
   id            String     @id @default(uuid()) @map("user_id") @db.Char(36)
   email         String     @unique
   photo_profile String?
@@ -22,6 +22,7 @@ model user{
   absent        String?
   classes       String?
   school_origin  String?
+  userAuth      UserAuth?
   teacher_sub   Teacher[]
   generation    String?
 }
@@ -33,7 +34,15 @@ model Teacher{
   name String
   major String
   exercise Exercise[]
-  subcription user[]
+  subcription User[]
+}
+
+model UserAuth {
+  id         String    @id @default(uuid()) @map("userauth_id") @db.Char(36)
+  password   String?
+  last_login DateTime?
+  userEmail  String    @unique
+  user       User      @relation(fields: [userEmail], references: [email], onDelete: Cascade)
 }
 
 model Exercise{
