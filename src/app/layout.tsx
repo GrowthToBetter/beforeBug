@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
+import AuthProviders from "@/lib/AuthProvider";
+import ProgressBarProvider from "@/lib/ProgressBar";
+import Script from "next/script";
+import { nextGetServerSession } from "@/lib/authOption";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,12 +27,26 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const session=nextGetServerSession();
+  if(!session) console.log("no session");
   return (
     <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
-        {children}
+        <AuthProviders>
+          <ProgressBarProvider>
+            {/* 
+            session ? <Navbar/> : <SideBar/>
+            */}
+            {children}
+          </ProgressBarProvider>
+        </AuthProviders>
+        <Script
+          src="https://app.sandbox.midtrans.com/snap/snap.js"
+          data-client-key={process.env.NEXT_PUBLIC_MIDTRANS_CLIENT_KEY}
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

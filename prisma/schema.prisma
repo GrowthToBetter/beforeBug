@@ -27,6 +27,12 @@ model User{
   generation    String?
 }
 
+model Learn{
+  id String @id @default(uuid()) @map("learn_id") @db.Char(36)
+  link String
+  name String
+}
+
 model Teacher{
   id String @id @default(uuid()) @map("teacher_id") @db.Char(36)
   email  String
