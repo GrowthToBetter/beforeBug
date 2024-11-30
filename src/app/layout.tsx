@@ -5,6 +5,7 @@ import AuthProviders from "@/lib/AuthProvider";
 import ProgressBarProvider from "@/lib/ProgressBar";
 import Script from "next/script";
 import { nextGetServerSession } from "@/lib/authOption";
+import Navbar from "@/app/components/utils/navbar";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -27,8 +28,8 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const session=nextGetServerSession();
-  if(!session) console.log("no session");
+  const session = nextGetServerSession();
+  if (!session) console.log("no session");
   return (
     <html lang="en">
       <body
@@ -39,6 +40,7 @@ export default function RootLayout({
             {/* 
             session ? <Navbar/> : <SideBar/>
             */}
+            <Navbar />
             {children}
           </ProgressBarProvider>
         </AuthProviders>
