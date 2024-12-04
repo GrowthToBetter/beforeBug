@@ -17,19 +17,18 @@ export default function Signin() {
   const [register, setRegister] = useState(false);
 
   const { data, error } = useSWR(
-    session ? `http://localhost:3001/api/user/${session?.user?.id}` : null,
+    session ? `http://localhost:3001/api/users/${session?.user?.id}` : null,
     fetcher,
     {
       refreshInterval: 1000,
     }
   );
-
   useEffect(() => {
     if (data) {
-      setUserData(data.user);
+      setUserData(data);
     }
   }, [data]);
-
+  console.log(userData);
   useEffect(() => {
     if (session && userData) {
       toast.success("Berhasil Login!");
