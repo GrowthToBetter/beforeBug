@@ -22,6 +22,7 @@ model User{
   absent        String?
   classes       String?
   school_origin  String?
+  role    Role @default(SISWA)
   userAuth      UserAuth?
   teacher_sub   Teacher[]
   generation    String?
@@ -57,4 +58,11 @@ model Exercise{
   dificulty String
   matery String
   Teacher Teacher[]
+}
+
+
+enum Role {
+  SISWA
+  GURU
+  ADMIN
 }

@@ -108,7 +108,7 @@ export const authOptions: AuthOptions = {
           const userDatabase = await findUser({ email: user.email });
           if (!userDatabase) {
             const role =
-              user.email === "dummyakun12311@gmail.com" ? "SUPERADMIN" : null;
+              user.email === "dummyakun12311@gmail.com" ? "ADMIN" : null;
               
             if (!role) {
               return "/AccessDenied";
@@ -119,6 +119,7 @@ export const authOptions: AuthOptions = {
                 user.image ||
                 "https://res.cloudinary.com/dvwhepqbd/image/upload/v1720580914/pgfrhzaobzcajvugl584.png",
               name: user.name || "",
+              role,
               userAuth: {
                 create: {
                   last_login: new Date(),
