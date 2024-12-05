@@ -19,7 +19,6 @@ export default function Navbar() {
     setModal(!modal);
   };
 
-
   const link: NavbarProps[] = [
     {
       title: "Home",
@@ -56,12 +55,18 @@ export default function Navbar() {
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {status=="authenticated" ? (
+          {status == "authenticated" ? (
             <button
               type="button"
               onClick={() => signOut({ callbackUrl: "/signin" })}
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
-              logout
+              <Image
+                src={session?.user?.image as string}
+                alt="user image"
+                width={36}
+                height={36}
+                className="rounded-full"
+              />
             </button>
           ) : (
             <button
