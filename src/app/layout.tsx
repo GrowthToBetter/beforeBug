@@ -5,7 +5,7 @@ import AuthProviders from "@/lib/AuthProvider";
 import ProgressBarProvider from "@/lib/ProgressBar";
 import Script from "next/script";
 import { nextGetServerSession } from "@/lib/authOption";
-import { NewNavbar } from "@/app/components/utils/navigate";
+import { Navbar } from "@/app/components/utils/navigate";
 import { Poppins } from "next/font/google";
 
 const poppins = Poppins({
@@ -42,7 +42,7 @@ export default async function RootLayout({
         <AuthProviders>
           <ProgressBarProvider>
             {/* {session ? <Navbar /> : <Sidebar />} */}
-            <NewNavbar />
+            <Navbar />
             {children}
           </ProgressBarProvider>
         </AuthProviders>
