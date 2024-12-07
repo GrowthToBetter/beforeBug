@@ -16,27 +16,26 @@ interface NavbarProps {
 
 export function Navbar() {
   const [modal, setModal] = useState(false);
-
+  const { data: session, status } = useSession();
   const handleClick = () => {
     setModal(!modal);
   };
 
-  const session = useSession();
   const link: NavbarProps[] = [
     {
       title: "Home",
       href: "#home",
     },
     {
-      title: "Fitur",
+      title: "About",
       href: "#about",
     },
     {
-      title: "Tentang Kami",
+      title: "Services",
       href: "#services",
     },
     {
-      title: "Pengembang",
+      title: "Contact",
       href: "#contact",
     },
   ];
@@ -59,7 +58,22 @@ export function Navbar() {
           </span>
         </a>
         <div className="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
-          {session ? (
+          {status == "authenticated" ? (
+            <button
+              title="User"
+              type="button"
+              onClick={() => signOut({ callbackUrl: "/signin" })}
+              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
+            >
+              <Image
+                src={session?.user?.image as string}
+                alt="user image"
+                width={36}
+                height={36}
+                className="rounded-full"
+              />
+            </button>
+          ) : (
             <button
               type="button"
               onClick={() => {
@@ -68,16 +82,6 @@ export function Navbar() {
               className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
             >
               Login
-            </button>
-          ) : (
-            <button
-              type="button"
-              onClick={() => {
-                signOut();
-              }}
-              className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-4 py-2 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
-            >
-              logout
             </button>
           )}
           <button
