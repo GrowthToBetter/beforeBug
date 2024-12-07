@@ -27,9 +27,10 @@ export default function Header() {
                 <h1 className="text-white text-3xl font-black">↳</h1>
                 <LinkButton
                   href="/login"
-                  title="Get Started"
                   className="bg-blue-500 hover:bg-blue-600 text-white px-6 py-2 rounded-lg shadow-lg backdrop-blur-md transition duration-300"
-                />
+                >
+                  Get Started
+                </LinkButton>
               </div>
             </div>
           </div>
