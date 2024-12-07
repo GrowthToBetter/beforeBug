@@ -17,7 +17,7 @@ export default function Signin() {
   const [register, setRegister] = useState(false);
 
   const { data, error } = useSWR(
-    session ? `http://localhost:3001/api/users/${session?.user?.id}` : null,
+    session ? `https://be-before-bug.vercel.app/api/users/${session?.user?.id}` : null,
     fetcher,
     {
       refreshInterval: 1000,

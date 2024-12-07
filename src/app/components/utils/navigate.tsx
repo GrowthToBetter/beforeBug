@@ -7,6 +7,7 @@ import { useState } from "react";
 import { signIn, signOut, useSession } from "next-auth/react";
 import Link from "next/link";
 import Logo from "@/../public/Logo.png";
+import { usePathname } from "next/navigation";
 import { NewPressButton } from "./buttons";
 
 interface NavbarProps {
@@ -242,7 +243,8 @@ export function Sidebar() {
 export function Navbar() {
   const [modal, setModal] = useState(false);
   const { data: session, status } = useSession();
-
+  const pathname=usePathname();
+  if(pathname =="/AccessDenied") return null;
   const handleClick = () => {
     setModal(!modal);
   };
